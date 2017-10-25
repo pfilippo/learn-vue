@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>TodoMVC</title>
+		<link rel="stylesheet" href="main.css">
+	</head>
+	<body>
+		<section class="todoapp" id="app">
+			<header class="header">
+				<h1>{{header}}</h1>
+				<input class="new-todo" placeholder="What needs to be done?" autofocus v-model="newtodo" @keyup.enter="addToList">
+			</header>
+			<section class="main">
+				<input class="toggle-all" type="checkbox" v-model="alldone" v-on:click = markAll>
+				<label for="toggle-all">Mark all as complete</label>
+				<ul class="todo-list" v-for="(todo, index) in filtered">
+			  		<li>
+						<div class="view">
+							  <input class="toggle" type="checkbox" v-model="todo.checked"><label>{{todo.text}}</label>
+							  <button class="destroy" v-on:click="del(index)"></button>
+						</div>
+			  		</li>
+				</ul>
+			</section>
+			<footer class="footer">
+				<span class="todo-count"></span>
+				<ul class="filters">
+					<li v-on:click="filter(0)" v-bind:class="selected(0)"> All </li>
+					<li v-on:click="filter(1)" v-bind:class="selected(1)"> Active </li>
+					<li v-on:click="filter(2)" v-bind:class="selected(2)"> Completed </li>
+				</ul>
+				<button class="clear-completed" v-on:click="clearCompleted">Clear completed</button>
+		  	</footer>
+		</section>
+		<footer class="info">
+		  <p>Double-click to edit a todo</p>
+		</footer>
+		<script src="https://unpkg.com/vue"></script>
+		<script src="app.js"></script>
+	</body>
+</html>
